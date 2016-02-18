@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.xnews"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.jakewharton:butterknife:7.0.0'
+    compile 'com.zhy:okhttputils:2.1.0'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile('de.greenrobot:greendao:2.0.0')
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile files('src/libs/AMap_Location_v2.3.0_20160112.jar')
+    compile files('src/libs/AMap_Services_V2.7.0_20151125.jar')
+    compile files('src/libs/Android_Map_V2.7.20151124.jar')
+}

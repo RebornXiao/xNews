@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="标题" />
+
+    <RelativeLayout
+        android:id="@+id/main_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/ll_tab"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
+
+            <RadioGroup
+                android:id="@+id/rg_home_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_bottombar_ordercar"
+                    style="@style/bottombar"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:drawableTop="@drawable/style_btn_ordercar_bottom"
+                    android:text="新闻"
+                    android:textColor="@color/bottom_text_default"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_bottombar_parkadress"
+                    style="@style/bottombar"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:drawableTop="@drawable/style_btn_make_money_bottom"
+                    android:text="视频"
+                    android:textColor="@color/bottom_text_default"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_bottombar_mycount"
+                    style="@style/bottombar"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:drawableTop="@drawable/style_btn_mall_maket_bottom"
+                    android:text="图片"
+                    android:textColor="@color/bottom_text_default"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_bottombar_contact"
+                    style="@style/bottombar"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:checked="false"
+                    android:drawableTop="@drawable/style_btn_mine_bottom"
+                    android:text="我"
+                    android:textColor="@color/bottom_text_default"
+                    android:textSize="12sp" />
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <com.xnews.view.HorizontalScrollViewPager
+            android:id="@+id/viewpager_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_tab" />
+    </RelativeLayout>
+</RelativeLayout>

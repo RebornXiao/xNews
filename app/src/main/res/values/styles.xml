@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- 设置actionbar颜色和去除阴影的style -->
+    <style name="MyAppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <!-- <item name="android:actionOverflowButtonStyle">@style/MyCustomTheme.OverFlow</item> -->
+        <item name="android:popupMenuStyle">@style/MyPopupMenu</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#04a079</item>
+    </style>
+
+    <style name="MyPopupMenu" parent="android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@color/bg_white</item>
+    </style>
+
+    <style name="bottombar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+
+        <!-- <item name="android:background">#409524</item> -->
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="item_title">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/item_title</item>
+    </style>
+
+    <style name="item_content">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/ss_comment_from</item>
+    </style>
+
+    <style name="item_image">
+        <item name="android:background">@drawable/small_image_holder_listpage</item>
+        <item name="android:layout_width">@dimen/item_image_width</item>
+        <item name="android:layout_height">@dimen/item_image_height</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="item_image_gap">
+        <item name="android:layout_width">15.0dip</item>
+        <item name="android:layout_height">1.0dip</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="myProgressBarStyleLarge">
+        <item name="android:indeterminateDrawable">@drawable/progress_large_white</item>
+    </style>
+
+    <style name="drop_down_list_header_progress_bar_style">
+        <item name="android:minHeight">@dimen/drop_down_list_header_progress_bar_height</item>
+        <item name="android:maxHeight">@dimen/drop_down_list_header_progress_bar_height</item>
+    </style>
+
+    <style name="drop_down_list_footer_progress_bar_style">
+        <item name="android:minHeight">@dimen/drop_down_list_footer_progress_bar_height</item>
+        <item name="android:maxHeight">@dimen/drop_down_list_footer_progress_bar_height</item>
+    </style>
+
+    <style name="drop_down_list_header_font_style">
+        <item name="android:textColor">@color/drop_down_list_header_font_color</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="drop_down_list_header_second_font_style">
+        <item name="android:textColor">@color/drop_down_list_header_second_font_color</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="drop_down_list_footer_font_style">
+        <item name="android:textColor">@color/drop_down_list_footer_font_color</item>
+        <item name="android:textSize">@dimen/drop_down_list_footer_font_size</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+</resources>
