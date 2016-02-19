@@ -11,7 +11,7 @@ import com.xnews.R;
 import com.xnews.adapter.NewAdapter;
 import com.xnews.base.BaseFragment;
 import com.xnews.bean.NewModle;
-import com.xnews.callback.ReturnCallback;
+import com.xnews.callback.NewsDataCallback;
 import com.xnews.http.HttpRequest;
 import com.xnews.utils.MLog;
 import com.xnews.utils.ToastUtils;
@@ -30,7 +30,7 @@ import okhttp3.Request;
  * 新闻
  * Created by xiao on 2016/2/16.
  */
-public class NewsFragment extends BaseFragment {
+public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.listview)
     SwipeListView listview;
     @Bind(R.id.swipe_container)
@@ -69,7 +69,14 @@ public class NewsFragment extends BaseFragment {
         if (url_maps == null) {
             url_maps = new HashMap<String, String>();
         }
-        HttpRequest.getInstance().getNewsData(new ReturnCallback(mContext) {
+        getDataFromNet();
+    }
+
+    /**
+     * 从网络获取数据
+     */
+    private void getDataFromNet() {
+        HttpRequest.getInstance().getNewsData(new NewsDataCallback(mContext) {
 
             @Override
             public void onBefore(Request request) {
@@ -81,7 +88,8 @@ public class NewsFragment extends BaseFragment {
             public void onAfter() {
                 super.onAfter();
                 progressBar.setVisibility(View.GONE);
-
+                listview.onBottomComplete();
+                swipeContainer.setRefreshing(false);
             }
 
             @Override
@@ -139,14 +147,21 @@ public class NewsFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-
+        swipeContainer.setOnRefreshListener(this);
     }
-
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    /**
+     * 下拉刷新中
+     */
+    @Override
+    public void onRefresh() {
+        getDataFromNet();
     }
 }

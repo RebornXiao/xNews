@@ -38,6 +38,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="6dff16fcdefdf8f556cc0deb4e5da2ee" />
+
         <activity
             android:name="com.xnews.activity.MainActivity"
             android:launchMode="singleTask"
@@ -54,8 +59,14 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.xnews.activity.MapActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <service android:name="com.xnews.service.MyLocationService" />
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>

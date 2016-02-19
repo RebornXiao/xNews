@@ -44,10 +44,16 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     RelativeLayout llTab;
     @Bind(R.id.viewpager_content)
     HorizontalScrollViewPager mViewPager;
-    @Bind(R.id.main_center)
-    RelativeLayout mainCenter;
     @Bind(R.id.tv_main_title)
     TextView tvMainTitle;
+    @Bind(R.id.tv_main_address)
+    TextView tvMainAddress;
+    @Bind(R.id.view)
+    View view;
+    @Bind(R.id.rl_main_top)
+    RelativeLayout rlMainTop;
+    @Bind(R.id.view2)
+    View view2;
     private List<Class> fragments = new ArrayList<Class>();
     private MainPagerAdapter mainPagerAdapter;
     private int currIndex = 0;
@@ -59,8 +65,12 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-
         initData();
+    }
+
+    @OnClick(R.id.tv_main_address)
+    void jumpMap() {
+        activityUtil.jumpTo(MapActivity.class);
     }
 
     private void initData() {
@@ -126,6 +136,12 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     public void onEventMainThread(LocationEvent event) {
+        tvMainAddress.setText(app.addressNowCity);
+    }
+
+
+    @OnClick(R.id.tv_main_address)
+    void showAddress() {
 
     }
 

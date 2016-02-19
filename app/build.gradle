@@ -29,9 +29,10 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
     compile 'com.android.support:support-v4:23.1.1'
-    compile('de.greenrobot:greendao:2.0.0')
+    compile 'de.greenrobot:greendao:2.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile files('src/libs/3DMapV3_177.jar')
+    compile files('src/libs/AMap_Navi_v1.6.0_20151229.jar')
+    compile files('src/libs/AMap_Search_V2.8.0_20160105.jar')
     compile files('src/libs/AMap_Location_v2.3.0_20160112.jar')
-    compile files('src/libs/AMap_Services_V2.7.0_20151125.jar')
-    compile files('src/libs/Android_Map_V2.7.20151124.jar')
 }

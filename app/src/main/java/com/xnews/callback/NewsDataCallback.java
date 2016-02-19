@@ -18,11 +18,11 @@ import okhttp3.Response;
 /**
  * Created by xiao on 2016/1/11.
  */
-public abstract class ReturnCallback extends Callback<List<NewModle>> {
+public abstract class NewsDataCallback extends Callback<List<NewModle>> {
     private Context mContext;
     private int index = 0;
 
-    public ReturnCallback(Context mContext) {
+    public NewsDataCallback(Context mContext) {
         this.mContext = mContext;
 
     }
@@ -34,6 +34,8 @@ public abstract class ReturnCallback extends Callback<List<NewModle>> {
         List<NewModle> list = NewListJson.instance(mContext).readJsonNewModles(str,
                 Url.TopId);
         listsModles.addAll(list);
-        return list;
+        return listsModles;
     }
+
+
 }

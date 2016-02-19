@@ -3,79 +3,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_main_title"
+    <RelativeLayout
+        android:id="@+id/rl_main_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="标题" />
+        android:layout_height="40dp"
+        android:background="@color/bg_white">
+
+        <include layout="@layout/layout_main_top" />
+
+    </RelativeLayout>
+
 
     <RelativeLayout
-        android:id="@+id/main_center"
+        android:id="@+id/ll_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true">
 
-        <RelativeLayout
-            android:id="@+id/ll_tab"
+        <View
+            android:id="@+id/view2"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true">
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/graylight" />
 
-            <RadioGroup
-                android:id="@+id/rg_home_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rb_bottombar_ordercar"
-                    style="@style/bottombar"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:drawableTop="@drawable/style_btn_ordercar_bottom"
-                    android:text="新闻"
-                    android:textColor="@color/bottom_text_default"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:id="@+id/rb_bottombar_parkadress"
-                    style="@style/bottombar"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:drawableTop="@drawable/style_btn_make_money_bottom"
-                    android:text="视频"
-                    android:textColor="@color/bottom_text_default"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:id="@+id/rb_bottombar_mycount"
-                    style="@style/bottombar"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:drawableTop="@drawable/style_btn_mall_maket_bottom"
-                    android:text="图片"
-                    android:textColor="@color/bottom_text_default"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:id="@+id/rb_bottombar_contact"
-                    style="@style/bottombar"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:checked="false"
-                    android:drawableTop="@drawable/style_btn_mine_bottom"
-                    android:text="我"
-                    android:textColor="@color/bottom_text_default"
-                    android:textSize="12sp" />
-            </RadioGroup>
-
-        </RelativeLayout>
-
-        <com.xnews.view.HorizontalScrollViewPager
-            android:id="@+id/viewpager_content"
+        <RadioGroup
+            android:id="@+id/rg_home_bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/ll_tab" />
+            android:layout_below="@+id/view2"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_bottombar_ordercar"
+                style="@style/bottombar"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:drawableTop="@drawable/style_btn_ordercar_bottom"
+                android:text="新闻"
+                android:textColor="@color/bottom_text_default"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb_bottombar_parkadress"
+                style="@style/bottombar"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:drawableTop="@drawable/style_btn_make_money_bottom"
+                android:text="视频"
+                android:textColor="@color/bottom_text_default"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb_bottombar_mycount"
+                style="@style/bottombar"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:drawableTop="@drawable/style_btn_mall_maket_bottom"
+                android:text="图片"
+                android:textColor="@color/bottom_text_default"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb_bottombar_contact"
+                style="@style/bottombar"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:checked="false"
+                android:drawableTop="@drawable/style_btn_mine_bottom"
+                android:text="我"
+                android:textColor="@color/bottom_text_default"
+                android:textSize="12sp" />
+        </RadioGroup>
+
     </RelativeLayout>
+
+    <com.xnews.view.HorizontalScrollViewPager
+        android:id="@+id/viewpager_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_tab"
+        android:layout_below="@+id/rl_main_top" />
 </RelativeLayout>

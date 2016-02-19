@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white">
+
+    <TextView
+        android:id="@+id/tv_main_address"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@drawable/icon_address"
+        android:gravity="center_vertical"
+        android:paddingLeft="4dp"
+        android:text="深圳"
+        android:textColor="#444444"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="新闻"
+        android:textColor="#444444"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/graylight" />
+
+</RelativeLayout>

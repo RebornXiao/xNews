@@ -7,4 +7,5 @@ import com.xnews.base.BaseFragment;
  * Created by xiao on 2016/2/16.
  */
 public class MineFragment extends BaseFragment {
+
 }

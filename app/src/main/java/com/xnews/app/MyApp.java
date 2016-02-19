@@ -2,17 +2,18 @@ package com.xnews.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
+
+import com.xnews.service.MyLocationService;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * Created by xiao on 2016/1/20.
  */
 public class MyApp extends Application {
-
     private List<SoftReference<Activity>> activitys = new ArrayList<SoftReference<Activity>>();
     public String latitude = "";
     public String longitude = "";
@@ -37,6 +38,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        startService(new Intent(getBaseContext(), MyLocationService.class));
 
     }
 }

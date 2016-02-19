@@ -12,6 +12,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.xnews.app.MyApp;
 import com.xnews.event.LocationEvent;
+import com.xnews.utils.MLog;
 
 import de.greenrobot.event.EventBus;
 
@@ -71,12 +72,13 @@ public class MyLocationService extends Service implements AMapLocationListener {
             application.longitude = amapLocation.getLongitude() + "";
             application.gps = amapLocation.getLongitude() + ","
                     + amapLocation.getLatitude();
+            application.addressNowCity = amapLocation.getCity();
             String address = amapLocation.getAddress();
             if (address != null && address.length() > 0) {
                 application.curLocationSite = address;
             }
             EventBus.getDefault().post(new LocationEvent());
-
+            MLog.d("定位得到信息=" + application.gps);
         } else {
             Log.e("AmapErr", "Location ERR:"
                     + amapLocation.getErrorCode());
@@ -92,6 +94,7 @@ public class MyLocationService extends Service implements AMapLocationListener {
                     mLocationClient = new AMapLocationClient(getApplicationContext());
                     mLocationClient.setLocationListener(MyLocationService.this);
                     //设置定位间隔,单位毫秒,默认为2000ms
+                    mLocationOption.setInterval(60*1000);
                     //给定位客户端对象设置定位参数
                     mLocationClient.setLocationOption(mLocationOption);
                     //启动定位
