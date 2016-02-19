@@ -27,7 +27,7 @@ public abstract class PicDataCallback extends Callback<List<PicuterModle>> {
     public List<PicuterModle> parseNetworkResponse(Response response) throws IOException {
         List<PicuterModle> listsModles = new ArrayList<PicuterModle>();
         String str = response.body().string();
-        MLog.d("response.body().string()=" + str);
+        MLog.d("图片数据=" + str);
         List<PicuterModle> list = PicuterSinaJson.instance(mContext).readJsonPhotoListModles(
                 str);
         listsModles.addAll(list);

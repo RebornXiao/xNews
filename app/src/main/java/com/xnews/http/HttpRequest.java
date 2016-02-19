@@ -4,6 +4,7 @@ import com.xnews.callback.NewsDataCallback;
 import com.xnews.callback.PicDataCallback;
 import com.xnews.callback.VideoDataCallback;
 import com.xnews.config.Configure;
+import com.xnews.utils.MLog;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 
@@ -37,6 +38,7 @@ public class HttpRequest {
      */
     public static void getNewsData(final NewsDataCallback callBack) {
         String url = Configure.NEW_URL;
+        MLog.d("新闻接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)
@@ -51,6 +53,8 @@ public class HttpRequest {
      */
     public static void getVideoData(final VideoDataCallback callBack) {
         String url = Configure.VIDEO_URL;
+        MLog.d("视频接口=" + url);
+
         OkHttpUtils
                 .get()
                 .url(url)
@@ -65,6 +69,7 @@ public class HttpRequest {
      */
     public static void getPicData(final PicDataCallback callBack, int index) {
         String url = Configure.PIC_URL + index;
+        MLog.d("图片接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)

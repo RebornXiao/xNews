@@ -1,7 +1,6 @@
 package com.xnews.activity;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,6 +16,7 @@ import com.xnews.fragment.NewsFragment;
 import com.xnews.fragment.PicFragment;
 import com.xnews.fragment.VideoFragment;
 import com.xnews.view.HorizontalScrollViewPager;
+import com.xnews.view.LazyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 首页测试
  */
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity implements LazyViewPager.OnPageChangeListener {
     @Bind(R.id.rb_bottombar_ordercar)
     RadioButton rbBottombarOrdercar;
     @Bind(R.id.rb_bottombar_parkadress)

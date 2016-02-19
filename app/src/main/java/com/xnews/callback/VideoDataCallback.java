@@ -29,10 +29,10 @@ public abstract class VideoDataCallback extends Callback<List<VideoModle>> {
     public List<VideoModle> parseNetworkResponse(Response response) throws IOException {
         List<VideoModle> listsModles = new ArrayList<VideoModle>();
         String str = response.body().string();
-        MLog.d("response.body().string()=" + str);
+        MLog.d("视频数据=" + str);
         List<VideoModle> list =
                 ViedoListJson.instance(mContext).readJsonVideoModles(str,
-                        Url.VideoGaoXiaoId);
+                        Url.VideoReDianId);
         listsModles.addAll(list);
         return list;
     }

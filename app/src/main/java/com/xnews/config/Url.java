@@ -97,7 +97,9 @@ public class Url {
 
     // 视频 http://c.3g.163.com/nc/video/list/V9LG4B3A0/n/10-10.html
     public static final String Video = host + "nc/video/list/";
+
     public static final String VideoCenter = "/n/";
+
     public static final String videoEndUrl = "-10.html";
     // 热点视频
     public static final String VideoReDianId = "V9LG4B3A0";

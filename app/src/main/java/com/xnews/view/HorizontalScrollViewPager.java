@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 public class HorizontalScrollViewPager extends LazyViewPager  {
-
     private int downX;
     private int downY;
 

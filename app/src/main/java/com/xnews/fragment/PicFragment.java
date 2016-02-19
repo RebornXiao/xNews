@@ -88,14 +88,22 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
             @Override
             public void onAfter() {
                 super.onAfter();
-                progressBar.setVisibility(View.GONE);
-                listview.onBottomComplete();
-                swipeContainer.setRefreshing(false);
+                if (progressBar != null) {
+                    progressBar.setVisibility(View.GONE);
+                }
+                if (listview != null) {
+                    listview.onBottomComplete();
+                }
+                if (swipeContainer != null) {
+                    swipeContainer.setRefreshing(false);
+                }
             }
 
             @Override
             public void onError(Request request, Exception e) {
-                progressBar.setVisibility(View.GONE);
+                if (progressBar != null) {
+                    progressBar.setVisibility(View.GONE);
+                }
                 ToastUtils.showLong(mContext, "请求失败！");
             }
 

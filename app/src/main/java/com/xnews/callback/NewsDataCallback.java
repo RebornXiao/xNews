@@ -30,7 +30,7 @@ public abstract class NewsDataCallback extends Callback<List<NewModle>> {
     public List<NewModle> parseNetworkResponse(Response response) throws IOException {
         List<NewModle> listsModles = new ArrayList<NewModle>();
         String str = response.body().string();
-        MLog.d("response.body().string()=" + str);
+        MLog.d("新闻数据=" + str);
         List<NewModle> list = NewListJson.instance(mContext).readJsonNewModles(str,
                 Url.TopId);
         listsModles.addAll(list);
