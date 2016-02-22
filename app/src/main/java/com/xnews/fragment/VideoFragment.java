@@ -12,11 +12,16 @@ import com.xnews.adapter.VideoAdapter;
 import com.xnews.base.BaseFragment;
 import com.xnews.bean.VideoModle;
 import com.xnews.callback.VideoDataCallback;
+import com.xnews.config.Url;
 import com.xnews.http.HttpRequest;
+import com.xnews.http.json.ViedoListJson;
 import com.xnews.utils.MLog;
+import com.xnews.utils.NetWorkHelper;
+import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.swiptlistview.SwipeListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -35,6 +40,8 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
     private VideoAdapter videoAdapter;
+    private int index = 0;
+    private boolean isFirst = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,54 +59,75 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
             videoAdapter = new VideoAdapter(mContext);
         }
         listview.setAdapter(videoAdapter);
-        getDataFromNet();
+        getDataFromNet(index);
+        isFirst = false;
     }
 
     /**
      * 从网络获取数据
      */
-    private void getDataFromNet() {
-        HttpRequest.getInstance().getVideoData(new VideoDataCallback(mContext) {
+    private void getDataFromNet(final int index) {
+        if (NetWorkHelper.isNetworkAvailable(mContext)) {
+            HttpRequest.getInstance().getVideoData(new VideoDataCallback(mContext) {
 
-            @Override
-            public void onBefore(Request request) {
-                super.onBefore(request);
-                progressBar.setVisibility(View.VISIBLE);
-            }
+                @Override
+                public void onBefore(Request request) {
+                    super.onBefore(request);
+                    if (index == 0&&isFirst) {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+                }
 
-            @Override
-            public void onAfter() {
-                super.onAfter();
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
+                @Override
+                public void onAfter() {
+                    super.onAfter();
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    if (listview != null) {
+                        listview.onBottomComplete();
+                    }
+                    if (swipeContainer != null) {
+                        swipeContainer.setRefreshing(false);
+                    }
                 }
-                if (listview != null) {
-                    listview.onBottomComplete();
-                }
-                if (swipeContainer != null) {
-                    swipeContainer.setRefreshing(false);
-                }
-            }
 
-            @Override
-            public void onError(Request request, Exception e) {
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
+                @Override
+                public void onError(Request request, Exception e) {
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    ToastUtils.showLong(mContext, "请求失败！");
                 }
-                ToastUtils.showLong(mContext, "请求失败！");
-            }
 
-            @Override
-            public void onResponse(List<VideoModle> response) {
-                MLog.d("response=" + response.toString());
-                videoAdapter.appendList(response);
-            }
-        });
+                @Override
+                public void onResponse(List<VideoModle> response) {
+                    MLog.d("response=" + response.toString());
+                    videoAdapter.appendList(response);
+                }
+            }, index);
+        } else {
+            List<VideoModle> listsModles = new ArrayList<VideoModle>();
+            String str = SharedPreferencesUtils.getString(mContext, "VideoFragment");
+            List<VideoModle> list =
+                    ViedoListJson.instance(mContext).readJsonVideoModles(str,
+                            Url.VideoReDianId);
+            listsModles.addAll(list);
+            videoAdapter.appendList(listsModles);
+        }
     }
 
 
     private void initView(View view) {
         swipeContainer.setOnRefreshListener(this);
+        listview.setOnBottomListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPagte++;
+                index = index + 20;
+                getDataFromNet(index);
+            }
+        });
     }
 
 
@@ -114,6 +142,6 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
      */
     @Override
     public void onRefresh() {
-        getDataFromNet();
+        getDataFromNet(index);
     }
 }

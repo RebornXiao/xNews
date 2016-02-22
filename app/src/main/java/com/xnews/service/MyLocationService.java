@@ -94,7 +94,7 @@ public class MyLocationService extends Service implements AMapLocationListener {
                     mLocationClient = new AMapLocationClient(getApplicationContext());
                     mLocationClient.setLocationListener(MyLocationService.this);
                     //设置定位间隔,单位毫秒,默认为2000ms
-                    mLocationOption.setInterval(60*1000);
+                    mLocationOption.setInterval(10*60*1000);
                     //给定位客户端对象设置定位参数
                     mLocationClient.setLocationOption(mLocationOption);
                     //启动定位

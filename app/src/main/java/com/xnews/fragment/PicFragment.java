@@ -14,7 +14,10 @@ import com.xnews.bean.NewModle;
 import com.xnews.bean.PicuterModle;
 import com.xnews.callback.PicDataCallback;
 import com.xnews.http.HttpRequest;
+import com.xnews.http.json.PicuterSinaJson;
 import com.xnews.utils.MLog;
+import com.xnews.utils.NetWorkHelper;
+import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.swiptlistview.SwipeListView;
 
@@ -44,6 +47,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
     private List<NewModle> listsModles;
     private Map<String, NewModle> newHashMap;
     protected Map<String, String> url_maps;
+    private boolean isFirst = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,53 +75,73 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
             url_maps = new HashMap<String, String>();
         }
         getDataFromNet(index);
+        isFirst = false;
     }
 
     /**
      * 从网络获取数据
      */
-    private void getDataFromNet(int index) {
-        HttpRequest.getInstance().getPicData(new PicDataCallback(mContext) {
+    private void getDataFromNet(final int index) {
+        if (NetWorkHelper.isNetworkAvailable(mContext)) {
+            HttpRequest.getInstance().getPicData(new PicDataCallback(mContext) {
 
-            @Override
-            public void onBefore(Request request) {
-                super.onBefore(request);
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAfter() {
-                super.onAfter();
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
+                @Override
+                public void onBefore(Request request) {
+                    super.onBefore(request);
+                    if (index == 0 && isFirst) {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
                 }
-                if (listview != null) {
-                    listview.onBottomComplete();
-                }
-                if (swipeContainer != null) {
-                    swipeContainer.setRefreshing(false);
-                }
-            }
 
-            @Override
-            public void onError(Request request, Exception e) {
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
+                @Override
+                public void onAfter() {
+                    super.onAfter();
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    if (listview != null) {
+                        listview.onBottomComplete();
+                    }
+                    if (swipeContainer != null) {
+                        swipeContainer.setRefreshing(false);
+                    }
                 }
-                ToastUtils.showLong(mContext, "请求失败！");
-            }
 
-            @Override
-            public void onResponse(List<PicuterModle> response) {
-                MLog.d("response=" + response.toString());
+                @Override
+                public void onError(Request request, Exception e) {
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    ToastUtils.showLong(mContext, "请求失败！");
+                }
 
-                pictureAdapter.appendList(response);
-            }
-        }, index);
+                @Override
+                public void onResponse(List<PicuterModle> response) {
+                    MLog.d("response=" + response.toString());
+
+                    pictureAdapter.appendList(response);
+                }
+            }, index);
+        } else {
+            List<PicuterModle> listsModles = new ArrayList<PicuterModle>();
+            String str = SharedPreferencesUtils.getString(mContext, "PicFragment");
+            List<PicuterModle> list = PicuterSinaJson.instance(mContext).readJsonPhotoListModles(
+                    str);
+            listsModles.addAll(list);
+            pictureAdapter.appendList(listsModles);
+        }
     }
 
     private void initView(View view) {
         swipeContainer.setOnRefreshListener(this);
+        listview.setOnBottomListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPagte++;
+                index = index + 20;
+                getDataFromNet(index);
+            }
+        });
     }
 
 

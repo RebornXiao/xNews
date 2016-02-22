@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 
 import com.xnews.R;
 import com.xnews.app.MyApp;
+import com.xnews.utils.NetWorkHelper;
 import com.xnews.utils.StringUtils;
+import com.xnews.utils.ToastUtils;
 
 /**
  * fragment享元类
@@ -16,7 +18,11 @@ import com.xnews.utils.StringUtils;
 public class BaseFragment extends Fragment {
     public Context mContext;
     public MyApp app;
-    private ProgressDialog mProgressDialog;
+    public ProgressDialog mProgressDialog;
+    /**
+     * 当前页
+     */
+    public int currentPagte = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,9 @@ public class BaseFragment extends Fragment {
         mContext = getActivity();
         mContext.setTheme(R.style.MyAppTheme);
         app = (MyApp) mContext.getApplicationContext();
+        if (!NetWorkHelper.isNetworkAvailable(mContext)) {
+            ToastUtils.showShort(mContext, "没有网络连接~");
+        }
     }
 
     protected void gotoNextActivity(Bundle mBundle, Class<?> cls) {

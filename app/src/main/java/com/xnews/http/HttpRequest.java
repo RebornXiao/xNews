@@ -4,6 +4,7 @@ import com.xnews.callback.NewsDataCallback;
 import com.xnews.callback.PicDataCallback;
 import com.xnews.callback.VideoDataCallback;
 import com.xnews.config.Configure;
+import com.xnews.config.Url;
 import com.xnews.utils.MLog;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -36,8 +37,8 @@ public class HttpRequest {
      *
      * @param callBack
      */
-    public static void getNewsData(final NewsDataCallback callBack) {
-        String url = Configure.NEW_URL;
+    public static void getNewsData(final NewsDataCallback callBack, int index) {
+        String url = Url.TopUrl + Url.TopId + "/" + index + Url.endUrl;
         MLog.d("新闻接口=" + url);
         OkHttpUtils
                 .get()
@@ -51,8 +52,9 @@ public class HttpRequest {
      *
      * @param callBack
      */
-    public static void getVideoData(final VideoDataCallback callBack) {
-        String url = Configure.VIDEO_URL;
+    public static void getVideoData(final VideoDataCallback callBack, int index) {
+        String url = "http://c.3g.163.com/nc/video/list/V9LG4B3A0/n/" + index + "-10.html";
+//        Url.Video + videoId + Url.VideoCenter + index + Url.videoEndUrl;
         MLog.d("视频接口=" + url);
 
         OkHttpUtils
@@ -76,5 +78,6 @@ public class HttpRequest {
                 .build()
                 .execute(callBack);
     }
+
 
 }

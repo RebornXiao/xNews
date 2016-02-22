@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flipview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/detail_image_bar" />
+
+    <TextView
+        android:id="@+id/new_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <com.xnews.view.flipview.FlipView
+        android:id="@+id/flip_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_title"
+        android:layout_centerHorizontal="true"
+        flipview:orientation="vertical"
+        tools:context="com.xnews.activity.ImageDetailActivity">
+
+    </com.xnews.view.flipview.FlipView>
+
+</RelativeLayout>
