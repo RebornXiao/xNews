@@ -15,11 +15,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class ImageDetailActivity extends BaseActivity implements FlipView.OnFlipListener,
         FlipView.OnOverFlipListener {
-    protected ImageAdapter imageAdapter;
     @Bind(R.id.back)
     TextView back;
     @Bind(R.id.title)
@@ -27,8 +27,9 @@ public class ImageDetailActivity extends BaseActivity implements FlipView.OnFlip
     @Bind(R.id.new_title)
     TextView newTitle;
     @Bind(R.id.flip_view)
-    FlipView  flipView;
+    FlipView mFlipView;
 
+    protected ImageAdapter imageAdapter;
     private List<String> imgList;
     private NewDetailModle newDetailModle;
     private String titleString;
@@ -39,16 +40,17 @@ public class ImageDetailActivity extends BaseActivity implements FlipView.OnFlip
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
         ButterKnife.bind(this);
+        initData();
         initView();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        init();
+
     }
 
-    public void init() {
+    public void initData() {
         try {
             if (getIntent().getExtras().getSerializable("newDetailModle") != null) {
                 newDetailModle = (NewDetailModle) getIntent().getExtras().getSerializable(
@@ -68,12 +70,15 @@ public class ImageDetailActivity extends BaseActivity implements FlipView.OnFlip
     public void initView() {
         try {
             newTitle.setText(titleString);
-            imageAdapter.appendList(imgList);
             mFlipView.setOnFlipListener(this);
-            mFlipView.setAdapter(imageAdapter);
             // mFlipView.peakNext(false);
             mFlipView.setOverFlipMode(OverFlipMode.RUBBER_BAND);
             mFlipView.setOnOverFlipListener(this);
+            if (imageAdapter == null) {
+                imageAdapter = new ImageAdapter(mContext);
+            }
+            mFlipView.setAdapter(imageAdapter);
+            imageAdapter.appendList(imgList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,16 +93,26 @@ public class ImageDetailActivity extends BaseActivity implements FlipView.OnFlip
     public void onFlippedToPage(FlipView v, int position, long id) {
     }
 
+    @OnClick(R.id.back)
+    void backMain() {
+        activityUtil.jumpBackTo(MainActivity.class);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+//        MobclickAgent.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+//        MobclickAgent.onPause(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        activityUtil.jumpBackTo(MainActivity.class);
+    }
 }

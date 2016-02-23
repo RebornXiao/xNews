@@ -22,6 +22,10 @@ public class ImageAdapter extends BaseAdapter {
     public List<String> lists = new ArrayList<String>();
     private Context context;
 
+    public ImageAdapter(Context context) {
+        this.context = context;
+    }
+
     public void appendList(List<String> list) {
         if (!lists.containsAll(list) && list != null && list.size() > 0) {
             lists.addAll(list);

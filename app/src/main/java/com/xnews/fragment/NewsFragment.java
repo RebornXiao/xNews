@@ -65,7 +65,9 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
     private void initData() {
-        listsModles = new ArrayList<NewModle>();
+        if (listsModles == null) {
+            listsModles = new ArrayList<NewModle>();
+        }
         if (newHashMap == null) {
             newHashMap = new HashMap<String, NewModle>();
         }
@@ -79,7 +81,8 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NewModle newModle = listsModles.get(position - 1);
+                MLog.d("新闻点击:" + position);
+                NewModle newModle = listsModles.get(position);
                 enterDetailActivity(newModle);
             }
         });

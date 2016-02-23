@@ -70,6 +70,7 @@ public class VideoAdapter extends BaseAdapter {
         VideoModle videoModle = lists.get(position);
         holder.videoTime.setText(videoModle.getLength());
         holder.videoTitle.setText(videoModle.getTitle());
+        holder.videoTimeStart.setText(videoModle.getPtime());
         Picasso.with(context).load(videoModle.getCover()).into(holder.videoImg);
 
         return convertView;
@@ -85,6 +86,8 @@ public class VideoAdapter extends BaseAdapter {
     static class ViewHolder {
         @Bind(R.id.video_img)
         ImageView videoImg;
+        @Bind(R.id.video_time_start)
+        TextView videoTimeStart;
         @Bind(R.id.video_title)
         TextView videoTitle;
         @Bind(R.id.video_time)

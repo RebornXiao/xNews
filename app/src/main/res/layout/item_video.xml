@@ -32,10 +32,9 @@
             android:src="@drawable/biz_video_list_icon"
             android:visibility="visible" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingLeft="10dp">
 
             <TextView
@@ -48,8 +47,17 @@
                 android:id="@+id/video_time"
                 style="@style/item_content"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/video_title" />
+
+            <TextView
+                android:id="@+id/video_time_start"
+                style="@style/item_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/video_title" />
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

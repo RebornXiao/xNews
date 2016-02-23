@@ -5,10 +5,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 
 import com.xnews.R;
+import com.xnews.activity.VideoPlayActivity;
 import com.xnews.adapter.VideoAdapter;
+import com.xnews.base.BaseActivity;
 import com.xnews.base.BaseFragment;
 import com.xnews.bean.VideoModle;
 import com.xnews.callback.VideoDataCallback;
@@ -42,6 +45,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
     private VideoAdapter videoAdapter;
     private int index = 0;
     private boolean isFirst = true;
+    protected List<VideoModle> listsModles;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +62,20 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         if (videoAdapter == null) {
             videoAdapter = new VideoAdapter(mContext);
         }
+        if (listsModles == null) {
+            listsModles = new ArrayList<VideoModle>();
+        }
         listview.setAdapter(videoAdapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MLog.d("视频点击:" + position);
+                VideoModle videoModle = listsModles.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("playUrl", videoModle.getMp4Hd_url());
+                ((BaseActivity) getActivity()).openActivity(VideoPlayActivity.class, bundle, 0);
+            }
+        });
         getDataFromNet(index);
         isFirst = false;
     }
@@ -73,7 +90,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
                 @Override
                 public void onBefore(Request request) {
                     super.onBefore(request);
-                    if (index == 0&&isFirst) {
+                    if (index == 0 && isFirst) {
                         progressBar.setVisibility(View.VISIBLE);
                     }
                 }
@@ -104,10 +121,10 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
                 public void onResponse(List<VideoModle> response) {
                     MLog.d("response=" + response.toString());
                     videoAdapter.appendList(response);
+                    listsModles.addAll(response);
                 }
             }, index);
         } else {
-            List<VideoModle> listsModles = new ArrayList<VideoModle>();
             String str = SharedPreferencesUtils.getString(mContext, "VideoFragment");
             List<VideoModle> list =
                     ViedoListJson.instance(mContext).readJsonVideoModles(str,

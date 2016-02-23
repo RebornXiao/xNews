@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <ProgressBar
         android:id="@+id/drop_down_list_footer_progress_bar"
@@ -20,8 +20,8 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:background="@android:color/transparent"
-        android:textColor="@color/gray"
         android:gravity="center"
-        android:text="@string/drop_down_list_footer_default_text" />
+        android:text="@string/drop_down_list_footer_default_text"
+        android:textColor="@color/gray" />
 
 </RelativeLayout>

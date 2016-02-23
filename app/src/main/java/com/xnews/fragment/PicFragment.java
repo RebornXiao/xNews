@@ -5,13 +5,17 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 
 import com.xnews.R;
+import com.xnews.activity.PicuterDetailActivity;
+import com.xnews.activity.VideoPlayActivity;
 import com.xnews.adapter.PictureAdapter;
+import com.xnews.base.BaseActivity;
 import com.xnews.base.BaseFragment;
-import com.xnews.bean.NewModle;
 import com.xnews.bean.PicuterModle;
+import com.xnews.bean.VideoModle;
 import com.xnews.callback.PicDataCallback;
 import com.xnews.http.HttpRequest;
 import com.xnews.http.json.PicuterSinaJson;
@@ -44,8 +48,8 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
 
     private int index = 0;
     private PictureAdapter pictureAdapter;
-    private List<NewModle> listsModles;
-    private Map<String, NewModle> newHashMap;
+    protected List<PicuterModle> listsModles;
+    private Map<String, PicuterModle> newHashMap;
     protected Map<String, String> url_maps;
     private boolean isFirst = true;
 
@@ -66,16 +70,33 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         }
         listview.setAdapter(pictureAdapter);
         if (listsModles == null) {
-            listsModles = new ArrayList<NewModle>();
+            listsModles = new ArrayList<PicuterModle>();
         }
         if (newHashMap == null) {
-            newHashMap = new HashMap<String, NewModle>();
+            newHashMap = new HashMap<String, PicuterModle>();
         }
         if (url_maps == null) {
             url_maps = new HashMap<String, String>();
         }
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MLog.d("图片点击:" + position);
+                PicuterModle photoModle = listsModles.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("pic_id", photoModle.getId());
+                ((BaseActivity) getActivity()).openActivity(PicuterDetailActivity.class,
+                        bundle, 0);
+            }
+        });
         getDataFromNet(index);
         isFirst = false;
+    }
+
+    public void enterDetailActivity(VideoModle videoModle) {
+        Bundle bundle = new Bundle();
+        bundle.putString("playUrl", videoModle.getMp4Hd_url());
+        ((BaseActivity) getActivity()).openActivity(VideoPlayActivity.class, bundle, 0);
     }
 
     /**
@@ -118,8 +139,8 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                 @Override
                 public void onResponse(List<PicuterModle> response) {
                     MLog.d("response=" + response.toString());
-
                     pictureAdapter.appendList(response);
+                    listsModles.addAll(response);
                 }
             }, index);
         } else {

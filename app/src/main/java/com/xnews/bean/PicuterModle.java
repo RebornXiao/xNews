@@ -2,7 +2,6 @@
 package com.xnews.bean;
 
 public class PicuterModle extends BaseModle {
-
     /**
      * 
      */
@@ -16,9 +15,21 @@ public class PicuterModle extends BaseModle {
      */
     private String title;
     /**
+     * ptime
+     */
+    private String ptime;
+    /**
      * pic
      */
     private String pic;
+
+    public String getPtime() {
+        return ptime;
+    }
+
+    public void setPtime(String ptime) {
+        this.ptime = ptime;
+    }
 
     public String getId() {
         return id;

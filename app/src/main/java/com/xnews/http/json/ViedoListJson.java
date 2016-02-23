@@ -51,7 +51,7 @@ public class ViedoListJson extends JsonPacket {
 
     /**
      * 获取图文列表
-     * 
+     *
      * @param jsonObject
      * @return
      * @throws Exception
@@ -64,12 +64,14 @@ public class ViedoListJson extends JsonPacket {
         int length = 0;
         String cover = "";
         String mp4Hd_url = "";
+        String ptime = "";
 
         vid = getString("vid", jsonObject);
         title = getString("title", jsonObject);
         length = getInt("length", jsonObject);
         cover = getString("cover", jsonObject);
         mp4Hd_url = getString("mp4_url", jsonObject);
+        ptime = getString("ptime", jsonObject);
 
         videoModle = new VideoModle();
 
@@ -83,6 +85,7 @@ public class ViedoListJson extends JsonPacket {
         }
         videoModle.setMp4Hd_url(mp4Hd_url);
         videoModle.setVid(vid);
+        videoModle.setPtime(ptime);
 
         return videoModle;
     }

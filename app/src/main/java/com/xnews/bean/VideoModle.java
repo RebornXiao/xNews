@@ -3,7 +3,7 @@ package com.xnews.bean;
 
 public class VideoModle extends BaseModle {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /**
@@ -26,6 +26,19 @@ public class VideoModle extends BaseModle {
      * mp4Hd_url
      */
     private String mp4Hd_url;
+
+    /**
+     * String ptime;
+     */
+    private String ptime;
+
+    public String getPtime() {
+        return ptime;
+    }
+
+    public void setPtime(String ptime) {
+        this.ptime = ptime;
+    }
 
     public String getVid() {
         return vid;

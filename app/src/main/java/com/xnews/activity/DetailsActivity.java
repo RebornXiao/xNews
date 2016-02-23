@@ -1,85 +1,177 @@
-
 package com.xnews.activity;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
-import com.tiger.quicknews.R;
-import com.tiger.quicknews.bean.NewDetailModle;
-import com.tiger.quicknews.bean.NewModle;
-import com.tiger.quicknews.http.HttpUtil;
-import com.tiger.quicknews.http.json.NewDetailJson;
-import com.tiger.quicknews.utils.Options;
-import com.tiger.quicknews.utils.StringUtils;
-import com.tiger.quicknews.wedget.ProgressPieView;
-import com.tiger.quicknews.wedget.htmltextview.HtmlTextView;
-import com.umeng.analytics.MobclickAgent;
+import com.squareup.picasso.Picasso;
+import com.xnews.R;
 import com.xnews.base.BaseActivity;
+import com.xnews.bean.NewDetailModle;
+import com.xnews.bean.NewModle;
+import com.xnews.callback.NewsDetailCallback;
+import com.xnews.http.HttpRequest;
+import com.xnews.http.json.NewDetailJson;
+import com.xnews.utils.NetWorkHelper;
+import com.xnews.utils.SharedPreferencesUtils;
+import com.xnews.utils.ToastUtils;
+import com.xnews.view.ProgressPieView;
+import com.xnews.view.htmltextview.HtmlTextView;
 
-import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import okhttp3.Request;
 
-@EActivity(R.layout.activity_details)
-public class DetailsActivity extends BaseActivity implements ImageLoadingListener,
-        ImageLoadingProgressListener {
 
-    @ViewById(R.id.new_title)
-    protected TextView newTitle;
-    @ViewById(R.id.new_time)
-    protected TextView newTime;
-    @ViewById(R.id.wb_details)
-    protected HtmlTextView webView;
-    // @ViewById(R.id.progressBar)
-    // protected ProgressBar progressBar;
-    @ViewById(R.id.progressPieView)
-    protected ProgressPieView mProgressPieView;
-    @ViewById(R.id.new_img)
-    protected ImageView newImg;
-    @ViewById(R.id.img_count)
-    protected TextView imgCount;
-    @ViewById(R.id.play)
+public class DetailsActivity extends BaseActivity
+//        implements ImageLoadingListener,
+//        ImageLoadingProgressListener
+{
+
     protected ImageView mPlay;
+    @Bind(R.id.back)
+    TextView back;
+    @Bind(R.id.title)
+    TextView title;
+    @Bind(R.id.title_bar_divider)
+    View titleBarDivider;
+    @Bind(R.id.new_title)
+    TextView newTitle;
+    @Bind(R.id.new_time)
+    TextView newTime;
+    @Bind(R.id.new_img)
+    ImageView newImg;
+    @Bind(R.id.wb_details)
+    HtmlTextView wbDetails;
+    @Bind(R.id.img_count)
+    TextView imgCount;
+    @Bind(R.id.progressPieView)
+    ProgressPieView mProgressPieView;
+    @Bind(R.id.play)
+    ImageView play;
+    @Bind(R.id.scrollview)
+    ScrollView scrollview;
+    @Bind(R.id.root_view)
+    RelativeLayout rootView;
     private String newUrl;
     private NewModle newModle;
     private String newID;
-    protected ImageLoader imageLoader;
     private String imgCountString;
 
-    protected DisplayImageOptions options;
 
     private NewDetailModle newDetailModle;
 
-    @AfterInject
-    public void init() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details);
+        ButterKnife.bind(this);
+        initWebView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    public void initData() {
         try {
             newModle = (NewModle) getIntent().getExtras().getSerializable("newModle");
             newID = newModle.getDocid();
             newUrl = getUrl(newID);
-            imageLoader = ImageLoader.getInstance();
-            options = Options.getListOptions();
+
+            getDataFromNet(newID, newUrl);
+
+//            imageLoader = ImageLoader.getInstance();
+//            options = Options.getListOptions();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @SuppressLint("JavascriptInterface")
-    @AfterViews
+    /**
+     * 从网络获取数据
+     */
+    private void getDataFromNet(String newID, String newUrl) {
+        if (NetWorkHelper.isNetworkAvailable(mContext)) {
+            HttpRequest.getInstance().getNewsDetailData(new NewsDetailCallback(mContext, newID, newUrl) {
+
+                @Override
+                public void onBefore(Request request) {
+                    super.onBefore(request);
+//                    if (index == 0 && isFirst) {
+                    mProgressPieView.setVisibility(View.VISIBLE);
+//                    }
+                }
+
+                @Override
+                public void onAfter() {
+                    super.onAfter();
+                    if (mProgressPieView != null) {
+                        mProgressPieView.setVisibility(View.GONE);
+                    }
+//                    if (listview != null) {
+//                        listview.onBottomComplete();
+//                    }
+//                    if (swipeContainer != null) {
+//                        swipeContainer.setRefreshing(false);
+//                    }
+                }
+
+                @Override
+                public void onError(Request request, Exception e) {
+                    if (mProgressPieView != null) {
+                        mProgressPieView.setVisibility(View.GONE);
+                    }
+                    ToastUtils.showLong(mContext, "请求失败！");
+                }
+
+                @Override
+                public void onResponse(NewDetailModle newDetailModle) {
+                    setData(newDetailModle);
+                }
+            }, newUrl);
+        } else {
+            String str = SharedPreferencesUtils.getString(mContext, newUrl);
+            SharedPreferencesUtils.putString(mContext, newUrl, str);
+            NewDetailModle newDetailModle = NewDetailJson.instance(mContext).readJsonNewModles(str,
+                    newID);
+            setData(newDetailModle);
+
+        }
+    }
+
+    private void setData(NewDetailModle newDetailModle) {
+        if (!"".equals(newDetailModle.getUrl_mp4())) {
+            Picasso.with(mContext).load(newDetailModle.getCover()).into(newImg);
+            newImg.setVisibility(View.VISIBLE);
+        } else {
+            if (newDetailModle.getImgList().size() > 0) {
+                imgCountString = "共" + newDetailModle.getImgList().size() + "张";
+                Picasso.with(mContext).load(newDetailModle.getImgList().get(0)).into(newImg);
+                newImg.setVisibility(View.VISIBLE);
+            }
+        }
+        newTitle.setText(newDetailModle.getTitle());
+        newTime.setText("来源：" + newDetailModle.getSource() + " " + newDetailModle.getPtime());
+        String content = newDetailModle.getBody();
+        content = content.replace("<!--VIDEO#1--></p><p>", "");
+        content = content.replace("<!--VIDEO#2--></p><p>", "");
+        content = content.replace("<!--VIDEO#3--></p><p>", "");
+        content = content.replace("<!--VIDEO#4--></p><p>", "");
+        content = content.replace("<!--REWARD#0--></p><p>", "");
+        wbDetails.setHtmlFromString(content, false);
+        dismissProgressDialog();
+    }
+
     public void initWebView() {
         try {
             mProgressPieView.setShowText(true);
@@ -93,79 +185,23 @@ public class DetailsActivity extends BaseActivity implements ImageLoadingListene
             // webView.setBackgroundResource(R.color.transparent);
             // webView.setWebViewClient(new MyWebViewClient());
             showProgressDialog();
-            loadData(newUrl);
+            initData();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void loadData(String url) {
-        if (hasNetWork()) {
-            loadNewDetailData(url);
-        } else {
-            dismissProgressDialog();
-            showShortToast(getString(R.string.not_network));
-            String result = getCacheStr(newUrl);
-            if (!StringUtils.isEmpty(result)) {
-                getResult(result);
-            }
-        }
-    }
 
-    @Background
-    public void loadNewDetailData(String url) {
-        String result;
-        try {
-            result = HttpUtil.getByHttpClient(this, url);
-            getResult(result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @UiThread
-    public void getResult(String result) {
-        newDetailModle = NewDetailJson.instance(this).readJsonNewModles(result,
-                newID);
-        if (newDetailModle == null)
-            return;
-        setCacheStr(newUrl, result);
-        if (!"".equals(newDetailModle.getUrl_mp4())) {
-            imageLoader.displayImage(newDetailModle.getCover(), newImg, options, this,
-                    this);
-            newImg.setVisibility(View.VISIBLE);
-        } else {
-            if (newDetailModle.getImgList().size() > 0) {
-                imgCountString = "共" + newDetailModle.getImgList().size() + "张";
-                imageLoader.displayImage(newDetailModle.getImgList().get(0), newImg, options, this,
-                        this);
-                newImg.setVisibility(View.VISIBLE);
-            }
-        }
-        newTitle.setText(newDetailModle.getTitle());
-        newTime.setText("来源：" + newDetailModle.getSource() + " " + newDetailModle.getPtime());
-        String content = newDetailModle.getBody();
-        content = content.replace("<!--VIDEO#1--></p><p>", "");
-        content = content.replace("<!--VIDEO#2--></p><p>", "");
-        content = content.replace("<!--VIDEO#3--></p><p>", "");
-        content = content.replace("<!--VIDEO#4--></p><p>", "");
-        content = content.replace("<!--REWARD#0--></p><p>", "");
-        webView.setHtmlFromString(content, false);
-        dismissProgressDialog();
-        // webView.loadDataWithBaseURL(null, content, "text/html", "utf-8",
-        // null);
-    }
-
-    @Click(R.id.new_img)
+    @OnClick(R.id.new_img)
     public void imageMore(View view) {
         try {
             Bundle bundle = new Bundle();
             bundle.putSerializable("newDetailModle", newDetailModle);
             if (!"".equals(newDetailModle.getUrl_mp4())) {
                 bundle.putString("playUrl", newDetailModle.getUrl_mp4());
-                openActivity(VideoPlayActivity_.class, bundle, 0);
+                openActivity(VideoPlayActivity.class, bundle, 0);
             } else {
-                openActivity(ImageDetailActivity_.class, bundle, 0);
+                openActivity(ImageDetailActivity.class, bundle, 0);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,7 +222,7 @@ public class DetailsActivity extends BaseActivity implements ImageLoadingListene
             // html加载完成之后，添加监听图片的点击js函数
             // progressBar.setVisibility(View.GONE);
             dismissProgressDialog();
-            webView.setVisibility(View.VISIBLE);
+            wbDetails.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -197,61 +233,61 @@ public class DetailsActivity extends BaseActivity implements ImageLoadingListene
 
         @Override
         public void onReceivedError(WebView view, int errorCode,
-                String description, String failingUrl) {
+                                    String description, String failingUrl) {
             // progressBar.setVisibility(View.GONE);
             dismissProgressDialog();
             super.onReceivedError(view, errorCode, description, failingUrl);
         }
     }
 
-    @Override
-    public void onLoadingStarted(String imageUri, View view) {
-        mProgressPieView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-        mProgressPieView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-        if (!"".equals(newDetailModle.getUrl_mp4())) {
-            mPlay.setVisibility(View.VISIBLE);
-        } else {
-            imgCount.setVisibility(View.VISIBLE);
-            imgCount.setText(imgCountString);
-        }
-        mProgressPieView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onLoadingCancelled(String imageUri, View view) {
-        mProgressPieView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onProgressUpdate(String imageUri, View view, int current, int total) {
-        int currentpro = (current * 100 / total);
-        if (currentpro == 100) {
-            mProgressPieView.setVisibility(View.GONE);
-            mProgressPieView.setShowText(false);
-        } else {
-            mProgressPieView.setVisibility(View.VISIBLE);
-            mProgressPieView.setProgress(currentpro);
-            mProgressPieView.setText(currentpro + "%");
-        }
-    }
+//    @Override
+//    public void onLoadingStarted(String imageUri, View view) {
+//        mProgressPieView.setVisibility(View.VISIBLE);
+//    }
+//
+//    @Override
+//    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+//        mProgressPieView.setVisibility(View.GONE);
+//    }
+//
+//    @Override
+//    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//        if (!"".equals(newDetailModle.getUrl_mp4())) {
+//            mPlay.setVisibility(View.VISIBLE);
+//        } else {
+//            imgCount.setVisibility(View.VISIBLE);
+//            imgCount.setText(imgCountString);
+//        }
+//        mProgressPieView.setVisibility(View.GONE);
+//    }
+//
+//    @Override
+//    public void onLoadingCancelled(String imageUri, View view) {
+//        mProgressPieView.setVisibility(View.GONE);
+//    }
+//
+//    @Override
+//    public void onProgressUpdate(String imageUri, View view, int current, int total) {
+//        int currentpro = (current * 100 / total);
+//        if (currentpro == 100) {
+//            mProgressPieView.setVisibility(View.GONE);
+//            mProgressPieView.setShowText(false);
+//        } else {
+//            mProgressPieView.setVisibility(View.VISIBLE);
+//            mProgressPieView.setProgress(currentpro);
+//            mProgressPieView.setText(currentpro + "%");
+//        }
+//    }
 
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+//        MobclickAgent.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+//        MobclickAgent.onPause(this);
     }
 }

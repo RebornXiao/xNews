@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.xnews.R;
 import com.xnews.bean.NewModle;
+import com.xnews.utils.MLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,9 +76,14 @@ public class NewAdapter extends BaseAdapter {
 
         NewModle newModle = lists.get(position);
         if (newModle.getImagesModle() == null) {
+            MLog.d("新闻" + position + ":" + newModle.getTitle());
             holder.articleLayout.setVisibility(View.VISIBLE);
+            holder.layoutImage.setVisibility(View.GONE);
+            holder.titleLayout.setVisibility(View.VISIBLE);
             holder.itemImageLayout.setVisibility(View.GONE);
+
             holder.itemTitle.setText(newModle.getTitle());
+            holder.itemTime.setText(newModle.getPtime());
             if ("北京".equals(currentItem)) {
 
 
@@ -91,8 +97,11 @@ public class NewAdapter extends BaseAdapter {
                 holder.leftImage.setVisibility(View.GONE);
             }
         } else {
+            MLog.d("照片" + position + newModle.getTitle());
+            holder.articleLayout.setVisibility(View.VISIBLE);
             holder.layoutImage.setVisibility(View.VISIBLE);
-            holder.articleLayout.setVisibility(View.GONE);
+            holder.titleLayout.setVisibility(View.GONE);
+            holder.itemImageLayout.setVisibility(View.VISIBLE);
             holder.itemAbstract.setText(newModle.getTitle());
             List<String> imageModle = newModle.getImagesModle().getImgList();
             Picasso.with(context).load(imageModle.get(0)).into(holder.itemImage0);
@@ -111,13 +120,24 @@ public class NewAdapter extends BaseAdapter {
      *
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
-    static class ViewHolder {
+    static
+
+            /**
+             * This class contains all butterknife-injected Views & Layouts from layout file 'item_new.xml'
+             * for easy to all layout elements.
+             *
+             * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
+             */
+
+    class ViewHolder {
         @Bind(R.id.left_image)
         ImageView leftImage;
         @Bind(R.id.item_title)
         TextView itemTitle;
         @Bind(R.id.item_content)
         TextView itemContent;
+        @Bind(R.id.item_time)
+        TextView itemTime;
         @Bind(R.id.title_layout)
         RelativeLayout titleLayout;
         @Bind(R.id.article_top_layout)

@@ -1,7 +1,9 @@
 package com.xnews.http;
 
 import com.xnews.callback.NewsDataCallback;
+import com.xnews.callback.NewsDetailCallback;
 import com.xnews.callback.PicDataCallback;
+import com.xnews.callback.PicDetailCallback;
 import com.xnews.callback.VideoDataCallback;
 import com.xnews.config.Configure;
 import com.xnews.config.Url;
@@ -72,6 +74,33 @@ public class HttpRequest {
     public static void getPicData(final PicDataCallback callBack, int index) {
         String url = Configure.PIC_URL + index;
         MLog.d("图片接口=" + url);
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callBack);
+    }
+
+    /**
+     * 获取新闻详情数据
+     *
+     * @param callBack
+     */
+    public static void getNewsDetailData(final NewsDetailCallback callBack, String url) {
+        MLog.d("新闻详情接口=" + url);
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(callBack);
+    }
+    /**
+     * 获取图片详情数据
+     *
+     * @param callBack
+     */
+    public static void getPicDetailData(final PicDetailCallback callBack, String url) {
+        MLog.d("新闻详情接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)

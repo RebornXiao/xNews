@@ -26,8 +26,6 @@
     <item name="abc_search_url_text_selected" type="color">@*android:color/black</item>
     <item name="abc_search_url_text_pressed" type="color">@*android:color/black</item>
 
-    <color name="main_red">#ffcc3131</color>
-
     <color name="gallery_background">#ff111111</color>
     <color name="gallery_alpha">#b0000000</color>
     <color name="white">#ffffffff</color>
@@ -71,6 +69,9 @@
     <color name="bg_row_pressed_center">#ffcccccc</color>
     <color name="bg_row_pressed_end">#ffcccccc</color>
     <color name="bg_row_normal">#ffffffff</color>
+
+    <color name="detail_activity_bg_color">#fff6f7f7</color>
+    <color name="main_red">#ffcc3131</color>
 
     <item name="bg_row_normal_start1" type="color">@color/menu_item_text_normal</item>
     <item name="bg_row_normal_center1" type="color">@color/bg_row_normal</item>
@@ -251,9 +252,6 @@
 
     <item name="detail_title_text_color_night" type="color">@color/default_text_night</item>
 
-    <color name="activity_bg_color_night">#ff1a1a1a</color>
-    <color name="detail_activity_bg_color">#fff6f7f7</color>
-    <color name="detail_activity_bg_color_night">#ff1a1a1a</color>
     <color name="item_ad_download_bg_normal">#e5eeeeee</color>
     <color name="item_ad_download_bg_pressed">#e5f9f9f9</color>
     <color name="item_ad_download_text">#ff696969</color>
@@ -587,6 +585,7 @@
 
     <item name="toolbar_bg" type="color">@color/activity_bg_color</item>
     <item name="toolbar_bg_night" type="color">@color/activity_bg_color_night</item>
+    <color name="activity_bg_color_night">#ff1a1a1a</color>
 
     <color name="divider_left_bg">#ffacacac</color>
     <color name="divider_left_bg_night">#ff000000</color>
