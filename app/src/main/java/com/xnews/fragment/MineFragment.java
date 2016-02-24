@@ -92,7 +92,6 @@ public class MineFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_mine, null);
         view.setOnClickListener(null);
         ButterKnife.bind(this, view);
-        initData();
         return view;
     }
 
@@ -123,6 +122,12 @@ public class MineFragment extends BaseFragment {
         } else {
             gotoNextActivity(null, LoginActivity.class);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     @Override

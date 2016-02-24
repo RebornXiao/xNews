@@ -5,22 +5,27 @@ package greendao;
  */
 public class Person {
     private Long id;
-    private Integer vipLevel;//vip等级
+    private Integer vipLevel = 1;//vip等级
     private String equipmentId;// 会员手机号码   "equipmentId": "18132165487",
-    private String userName;// 姓名    "userName": "18132165487",
-    private String sex;// 性别   "sex": "",
-    private String personID;// 身份证    "personID": ""
-    private String email;// 邮箱 "email": "",
-    private String userIntegral;// 用户积分 "userIntegral": "30",
+    private String userName = "";// 姓名    "userName": "18132165487",
+    private String sex = "";// 性别   "sex": "",
+    private String personID = "";// 身份证    "personID": ""
+    private String email = "";// 邮箱 "email": "",
+    private String userIntegral = "0";// 用户积分 "userIntegral": "30",
     private String role = "";// 登陆账户角色   "role": "general",
-    private String deposit;// -- 押金
-    private String balance;// --余额
-    private String remark;//备注
+    private String deposit = "0";// -- 押金
+    private String balance = "0";// --余额
+    private String remark = "";//备注
     private String psd;//密码
-    private String vitality;//活跃度
-    private Integer isVIP;//是否vip，是1，否0
+    private String vitality = "0";//活跃度
+    private Integer isVIP = 0;//是否vip，是1，否0
 
     public Person() {
+    }
+
+    public Person(String equipmentId, String psd) {
+        this.equipmentId = equipmentId;
+        this.psd = psd;
     }
 
     public Person(Long id) {

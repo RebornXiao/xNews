@@ -80,7 +80,6 @@ public class BaseActivity extends FragmentActivity {
      */
     public boolean isShow() {
         try {
-
             if (progressDialog != null && progressDialog.isShowing()) {
                 return true;
             }
