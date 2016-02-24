@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.xnews.R;
 import com.xnews.adapter.MainPagerAdapter;
 import com.xnews.base.BaseActivity;
+import com.xnews.base.BaseFragment;
 import com.xnews.event.LocationEvent;
 import com.xnews.fragment.MineFragment;
 import com.xnews.fragment.NewsFragment;
@@ -29,7 +30,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 首页测试
  */
-public class MainActivity extends BaseActivity implements LazyViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity implements LazyViewPager.OnPageChangeListener , BaseFragment.FragmentContorlListener {
     @Bind(R.id.rb_bottombar_ordercar)
     RadioButton rbBottombarOrdercar;
     @Bind(R.id.rb_bottombar_parkadress)
@@ -199,5 +200,16 @@ public class MainActivity extends BaseActivity implements LazyViewPager.OnPageCh
         nexItem = 3;
         mViewPager.setCurrentItem(nexItem);
     }
+
+    @Override
+    public void gotoNextActivity(Bundle mBundle, Class<?> cls) {
+        activityUtil.jumpTo(cls);
+    }
+
+    @Override
+    public void gotoNextFragment(int id, Bundle mBundle, Class<?> cls) {
+
+    }
+
 
 }

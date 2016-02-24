@@ -1,3 +1,2 @@
-include ':vitamio'
+include ':vitamio', ':mydaogenerator'
 include 'app'
-include 'vitamio'

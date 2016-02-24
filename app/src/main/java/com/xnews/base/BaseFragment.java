@@ -3,6 +3,7 @@ package com.xnews.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 
 import com.xnews.R;
@@ -19,10 +20,12 @@ public class BaseFragment extends Fragment {
     public Context mContext;
     public MyApp app;
     public ProgressDialog mProgressDialog;
+    public long l = 0;
     /**
      * 当前页
      */
     public int currentPagte = 1;
+    public Handler uiHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class BaseFragment extends Fragment {
         mContext = getActivity();
         mContext.setTheme(R.style.MyAppTheme);
         app = (MyApp) mContext.getApplicationContext();
+        uiHandler = new Handler(getActivity().getMainLooper());
         if (!NetWorkHelper.isNetworkAvailable(mContext)) {
             ToastUtils.showShort(mContext, "没有网络连接~");
         }

@@ -12,6 +12,8 @@
     <color name="item_title_normal">#ff444444</color>
     <color name="ss_comment_from">#ff999999</color>
     <color name="activity_bg_color">#fff5f5f5</color>
+    <color name="top_background_default">#2ecc71</color>
+    <color name="bg_view">#e5e5e5</color>
 
     <!-- drop down list header font color -->
     <color name="drop_down_list_header_font_color">#000000</color>
@@ -19,7 +21,15 @@
     <color name="drop_down_list_header_second_font_color">#000000</color>
     <!-- drop down list footer font color -->
     <color name="drop_down_list_footer_font_color">#A2A3A2</color>
-
+    <color name="person_info_user_name_main">#333333</color>
+    <color name="mine_background_default">#f5f6f7</color>
+    <color name="mine_background">#f5f6f7</color>
+    <color name="mine_devier_color_default">#dddddd</color>
+    <color name="person_info_setting_items">#444444</color>
+    <color name="backgroud">#f3f8f1</color>
+    <color name="btn_text_color_red">#ff0000</color>
+    <color name="bg_color">#F3F3F3</color>
+    <color name="forget_psd">#797c78</color>
 
     <color name="abc_search_url_text_normal">#ff7fa87f</color>
 

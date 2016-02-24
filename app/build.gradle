@@ -7,6 +7,13 @@ android {
         minSdkVersion 15
         targetSdkVersion 18
     }
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'src/main/java-gen']
+            res.srcDirs = ['src/main/res']
+        }
+    }
 }
 
 dependencies {
@@ -25,4 +32,5 @@ dependencies {
     compile files('src/libs/AMap_Navi_v1.6.0_20151229.jar')
     compile files('src/libs/AMap_Search_V2.8.0_20160105.jar')
     compile files('src/libs/AMap_Location_v2.3.0_20160112.jar')
+    compile files('src/libs/pinyin4j-2.5.0.jar')
 }

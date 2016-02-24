@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mine_background_default">
+
+    <RelativeLayout
+        android:id="@+id/rl_main_top"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/bg_white">
+
+        <include layout="@layout/layout_map_top" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_main_top"
+        android:layout_marginTop="15dp"
+        android:background="@color/mine_background_default">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_view" />
+
+            <RelativeLayout style="@style/personinfo_item_layout">
+
+                <TextView
+                    style="@style/personinfo_list1"
+                    android:text="用户名" />
+
+                <TextView
+                    android:id="@+id/login_name"
+                    style="@style/personinfo_list2"
+                    android:text="袁微微" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:background="@color/bg_view" />
+
+            <RelativeLayout
+                android:id="@+id/layout_sex_test"
+                style="@style/personinfo_item_layout">
+
+                <TextView
+                    style="@style/personinfo_list1"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/login_sex"
+                    style="@style/personinfo_list2"
+                    android:text="女" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:background="@color/bg_view" />
+
+            <RelativeLayout style="@style/personinfo_item_layout">
+
+                <TextView
+
+                    style="@style/personinfo_list1"
+                    android:text="手机号" />
+
+                <TextView
+                    android:id="@+id/login_phone"
+                    style="@style/personinfo_list2"
+                    android:text="15926060207" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:background="@color/bg_view" />
+
+            <RelativeLayout
+                android:id="@+id/rl_person_status"
+                style="@style/personinfo_item_layout">
+
+                <TextView
+                    style="@style/personinfo_list1"
+                    android:text="会员状态" />
+
+                <ImageView
+                    android:id="@+id/login_status_right"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right" />
+
+                <TextView
+                    android:id="@+id/login_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/login_status_right"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_view" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/mine_background_default" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_view" />
+
+            <RelativeLayout style="@style/personinfo_item_layout">
+
+                <TextView
+                    style="@style/personinfo_list1"
+                    android:text="身份证号" />
+
+                <TextView
+                    android:id="@+id/login_dld"
+                    style="@style/personinfo_list2"
+                    android:text="42282019882521522" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_view" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/mine_background_default" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_view" />
+
+            <RelativeLayout
+                android:id="@+id/rl_change_pwd"
+                style="@style/personinfo_item_layout">
+
+                <TextView
+                    style="@style/personinfo_list1"
+                    android:text="修改密码" />
+
+                <TextView
+                    android:id="@+id/login_address"
+                    style="@style/personinfo_list2" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_view" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
