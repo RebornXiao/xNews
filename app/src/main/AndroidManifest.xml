@@ -46,7 +46,7 @@
             android:value="6dff16fcdefdf8f556cc0deb4e5da2ee" />
 
         <activity
-            android:name="com.xnews.activity.MainActivity"
+            android:name="com.xnews.activity.SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -71,7 +71,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="com.xnews.activity.SplashActivity"
+            android:name="com.xnews.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />

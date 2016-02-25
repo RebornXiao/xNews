@@ -25,7 +25,7 @@ dependencies {
     compile 'com.zhy:okhttputils:2.1.0'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
-    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:support-v4:22.1.1'
     compile 'de.greenrobot:greendao:2.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile files('src/libs/3DMapV3_177.jar')

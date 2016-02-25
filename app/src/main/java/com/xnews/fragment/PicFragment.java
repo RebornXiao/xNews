@@ -87,6 +87,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                 bundle.putString("pic_id", photoModle.getId());
                 ((BaseActivity) getActivity()).openActivity(PicuterDetailActivity.class,
                         bundle, 0);
+                app.readNews();
             }
         });
         getDataFromNet(index);

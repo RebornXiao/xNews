@@ -74,6 +74,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
                 Bundle bundle = new Bundle();
                 bundle.putString("playUrl", videoModle.getMp4Hd_url());
                 ((BaseActivity) getActivity()).openActivity(VideoPlayActivity.class, bundle, 0);
+                app.readNews();
             }
         });
         getDataFromNet(index);

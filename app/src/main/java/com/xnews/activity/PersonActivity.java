@@ -58,15 +58,16 @@ public class PersonActivity extends BaseActivity {
 
     private void iniData() {
         tvMainTitle.setText("我的信息");
-        TVUtils.setText(loginName,app.person.getUserName());
-        TVUtils.setText(loginSex,app.person.getSex());
-        TVUtils.setText(loginPhone,app.person.getEquipmentId());
-        if(app.person.getIsVIP()==1) {
+        TVUtils.setText(loginName, app.person.getUserName());
+        TVUtils.setText(loginSex, app.person.getSex());
+        TVUtils.setText(loginPhone, app.person.getEquipmentId());
+        if (app.person.getIsVIP() == 1) {
             TVUtils.setText(loginStatus, "VIP" + app.person.getVipLevel());
-        }else{
+        } else {
             TVUtils.setText(loginStatus, "非VIP");
         }
-        TVUtils.setText(loginDld,app.person.getPersonID());
+        TVUtils.setText(loginDld, app.person.getPersonID());
+
     }
 
 }

@@ -37,4 +37,5 @@ public class DBHelper {
     private static PersonDao getPersonDao(Context c) {
         return ((MyApp) c.getApplicationContext()).getDaoSession().getPersonDao();
     }
+
 }

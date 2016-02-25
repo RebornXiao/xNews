@@ -84,6 +84,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 MLog.d("新闻点击:" + position);
                 NewModle newModle = listsModles.get(position);
                 enterDetailActivity(newModle);
+                app.readNews();
             }
         });
         getDataFromNet(index);

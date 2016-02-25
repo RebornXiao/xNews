@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.xnews.db.DBHelper;
 import com.xnews.service.MyLocationService;
+import com.xnews.utils.ToastUtils;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class MyApp extends Application {
     public String curLocationSite = "火星";
     public String addressNowCity = "深圳市";
     public DaoSession daoSession;
-    private long l = 0;
+    public long l = 1;
     public boolean isLogin;
 
     public DaoSession getDaoSession() {
@@ -56,6 +57,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         startService(new Intent(getBaseContext(), MyLocationService.class));
+
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, DB_NAME, null);
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
@@ -68,5 +70,39 @@ public class MyApp extends Application {
         }
 
 
+    }
+
+    /**
+     * 阅读新闻视频图片增加积分和活跃度的操作
+     */
+    public void readNews() {
+        ToastUtils.showShort(this, "您的活跃度 +1 ，您的积分 +10");
+        person.setVitality((Integer.parseInt(person.getVitality()) + 1) + "");
+        person.setUserIntegral((Integer.parseInt(person.getUserIntegral()) + 10) + "");
+        if (Integer.parseInt(person.getUserIntegral()) > 200) {
+            if (person.getVipLevel() == 1) {
+                ToastUtils.showShort(this, "恭喜你，VIP等级提高啦！");
+            }
+            person.setVipLevel(2);
+        }
+        if (Integer.parseInt(person.getUserIntegral()) > 400) {
+            if (person.getVipLevel() == 2) {
+                ToastUtils.showShort(this, "恭喜你，VIP等级提高啦！");
+            }
+            person.setVipLevel(3);
+        }
+        if (Integer.parseInt(person.getUserIntegral()) > 800) {
+            if (person.getVipLevel() == 3) {
+                ToastUtils.showShort(this, "恭喜你，VIP等级提高啦！");
+            }
+            person.setVipLevel(4);
+        }
+        if (Integer.parseInt(person.getUserIntegral()) > 1600) {
+            if (person.getVipLevel() == 4) {
+                ToastUtils.showShort(this, "恭喜你，VIP等级提高啦！");
+            }
+            person.setVipLevel(5);
+        }
+        DBHelper.insertOrUpdate(this, person);
     }
 }

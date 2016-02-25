@@ -104,7 +104,7 @@ public class MineFragment extends BaseFragment {
                     ivSexMine.setImageResource(R.drawable.my_sex_man);
                 }
             }
-            TVUtils.setText(tvInfoName, app.person.getUserName());
+            TVUtils.setText(tvInfoName, "VIP "+app.person.getVipLevel());
             TVUtils.setText(tvMyMenuTo, app.person.getEquipmentId());
             TVUtils.setText(tvInfoMoney, app.person.getBalance());
             TVUtils.setText(tvVitalityNums, app.person.getVitality());
