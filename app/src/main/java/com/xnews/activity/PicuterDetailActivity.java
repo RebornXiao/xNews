@@ -9,6 +9,7 @@ import com.xnews.adapter.PicuterDetailAdapter;
 import com.xnews.base.BaseActivity;
 import com.xnews.bean.PicuterDetailModle;
 import com.xnews.callback.PicDetailCallback;
+import com.xnews.config.Tag;
 import com.xnews.config.Url;
 import com.xnews.http.HttpRequest;
 import com.xnews.http.json.PicuterSinaJson;
@@ -18,11 +19,13 @@ import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.flipview.FlipView;
 import com.xnews.view.flipview.OverFlipMode;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 import okhttp3.Request;
 
 public class PicuterDetailActivity extends BaseActivity implements
@@ -104,7 +107,7 @@ public class PicuterDetailActivity extends BaseActivity implements
                 }
 
                 @Override
-                public void onError(Request request, Exception e) {
+                public void onError(Call call, Exception e) {
 //                    if (progressBar != null) {
 //                        progressBar.setVisibility(View.GONE);
 //                    }
@@ -117,7 +120,7 @@ public class PicuterDetailActivity extends BaseActivity implements
                     MLog.d("response=" + response.toString());
                     picuterDetailAdapter.appendList(response);
                 }
-            }, url);
+            }, url, Tag.PICUTERDETAILACTIVITY);
 
         } else {
             dismissProgressDialog();
@@ -151,6 +154,7 @@ public class PicuterDetailActivity extends BaseActivity implements
     @Override
     public void onPause() {
         super.onPause();
+        OkHttpUtils.getInstance().cancelTag(Tag.PICUTERDETAILACTIVITY);
 //        MobclickAgent.onPause(this);
     }
 }

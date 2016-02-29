@@ -15,6 +15,7 @@ import com.xnews.base.BaseActivity;
 import com.xnews.base.BaseFragment;
 import com.xnews.bean.VideoModle;
 import com.xnews.callback.VideoDataCallback;
+import com.xnews.config.Tag;
 import com.xnews.config.Url;
 import com.xnews.http.HttpRequest;
 import com.xnews.http.json.ViedoListJson;
@@ -23,12 +24,14 @@ import com.xnews.utils.NetWorkHelper;
 import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.swiptlistview.SwipeListView;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 import okhttp3.Request;
 
 /**
@@ -111,7 +114,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
                 }
 
                 @Override
-                public void onError(Request request, Exception e) {
+                public void onError(Call call, Exception e) {
                     if (progressBar != null) {
                         progressBar.setVisibility(View.GONE);
                     }
@@ -124,7 +127,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
                     videoAdapter.appendList(response);
                     listsModles.addAll(response);
                 }
-            }, index);
+            }, index, Tag.VIDEOFRAGMENT);
         } else {
             String str = SharedPreferencesUtils.getString(mContext, "VideoFragment");
             List<VideoModle> list =
@@ -146,6 +149,12 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
                 getDataFromNet(index);
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        OkHttpUtils.getInstance().cancelTag(Tag.VIDEOFRAGMENT);
     }
 
 

@@ -39,12 +39,13 @@ public class HttpRequest {
      *
      * @param callBack
      */
-    public static void getNewsData(final NewsDataCallback callBack, int index) {
+    public static void getNewsData(final NewsDataCallback callBack, int index, Object tag) {
         String url = Url.TopUrl + Url.TopId + "/" + index + Url.endUrl;
         MLog.d("新闻接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)
+                .tag(tag)
                 .build()
                 .execute(callBack);
     }
@@ -54,7 +55,7 @@ public class HttpRequest {
      *
      * @param callBack
      */
-    public static void getVideoData(final VideoDataCallback callBack, int index) {
+    public static void getVideoData(final VideoDataCallback callBack, int index, Object tag) {
         String url = "http://c.3g.163.com/nc/video/list/V9LG4B3A0/n/" + index + "-10.html";
 //        Url.Video + videoId + Url.VideoCenter + index + Url.videoEndUrl;
         MLog.d("视频接口=" + url);
@@ -62,6 +63,7 @@ public class HttpRequest {
         OkHttpUtils
                 .get()
                 .url(url)
+                .tag(tag)
                 .build()
                 .execute(callBack);
     }
@@ -71,12 +73,13 @@ public class HttpRequest {
      *
      * @param callBack
      */
-    public static void getPicData(final PicDataCallback callBack, int index) {
+    public static void getPicData(final PicDataCallback callBack, int index, Object tag) {
         String url = Configure.PIC_URL + index;
         MLog.d("图片接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)
+                .tag(tag)
                 .build()
                 .execute(callBack);
     }
@@ -86,27 +89,28 @@ public class HttpRequest {
      *
      * @param callBack
      */
-    public static void getNewsDetailData(final NewsDetailCallback callBack, String url) {
+    public static void getNewsDetailData(final NewsDetailCallback callBack, String url, Object tag) {
         MLog.d("新闻详情接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)
+                .tag(tag)
                 .build()
                 .execute(callBack);
     }
+
     /**
      * 获取图片详情数据
      *
      * @param callBack
      */
-    public static void getPicDetailData(final PicDetailCallback callBack, String url) {
+    public static void getPicDetailData(final PicDetailCallback callBack, String url, Object tag) {
         MLog.d("新闻详情接口=" + url);
         OkHttpUtils
                 .get()
                 .url(url)
+                .tag(tag)
                 .build()
                 .execute(callBack);
     }
-
-
 }

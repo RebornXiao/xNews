@@ -16,6 +16,7 @@ import com.xnews.base.BaseActivity;
 import com.xnews.bean.NewDetailModle;
 import com.xnews.bean.NewModle;
 import com.xnews.callback.NewsDetailCallback;
+import com.xnews.config.Tag;
 import com.xnews.http.HttpRequest;
 import com.xnews.http.json.NewDetailJson;
 import com.xnews.utils.NetWorkHelper;
@@ -23,10 +24,12 @@ import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.ProgressPieView;
 import com.xnews.view.htmltextview.HtmlTextView;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 import okhttp3.Request;
 
 
@@ -127,7 +130,7 @@ public class DetailsActivity extends BaseActivity
                 }
 
                 @Override
-                public void onError(Request request, Exception e) {
+                public void onError(Call call, Exception e) {
                     if (mProgressPieView != null) {
                         mProgressPieView.setVisibility(View.GONE);
                     }
@@ -138,7 +141,7 @@ public class DetailsActivity extends BaseActivity
                 public void onResponse(NewDetailModle newDetailModle) {
                     setData(newDetailModle);
                 }
-            }, newUrl);
+            }, newUrl, Tag.DETAILSACTIVITY);
         } else {
             String str = SharedPreferencesUtils.getString(mContext, newUrl);
             SharedPreferencesUtils.putString(mContext, newUrl, str);
@@ -288,6 +291,7 @@ public class DetailsActivity extends BaseActivity
     @Override
     public void onPause() {
         super.onPause();
+        OkHttpUtils.getInstance().cancelTag(Tag.DETAILSACTIVITY);
 //        MobclickAgent.onPause(this);
     }
 }

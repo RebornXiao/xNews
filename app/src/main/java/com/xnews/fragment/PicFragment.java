@@ -17,6 +17,7 @@ import com.xnews.base.BaseFragment;
 import com.xnews.bean.PicuterModle;
 import com.xnews.bean.VideoModle;
 import com.xnews.callback.PicDataCallback;
+import com.xnews.config.Tag;
 import com.xnews.http.HttpRequest;
 import com.xnews.http.json.PicuterSinaJson;
 import com.xnews.utils.MLog;
@@ -24,6 +25,7 @@ import com.xnews.utils.NetWorkHelper;
 import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.swiptlistview.SwipeListView;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +34,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 import okhttp3.Request;
 
 /**
@@ -130,7 +133,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                 }
 
                 @Override
-                public void onError(Request request, Exception e) {
+                public void onError(Call call, Exception e) {
                     if (progressBar != null) {
                         progressBar.setVisibility(View.GONE);
                     }
@@ -143,7 +146,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                     pictureAdapter.appendList(response);
                     listsModles.addAll(response);
                 }
-            }, index);
+            }, index, Tag.PICFRAGMENT);
         } else {
             List<PicuterModle> listsModles = new ArrayList<PicuterModle>();
             String str = SharedPreferencesUtils.getString(mContext, "PicFragment");
@@ -164,6 +167,11 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                 getDataFromNet(index);
             }
         });
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        OkHttpUtils.getInstance().cancelTag(Tag.PICFRAGMENT);
     }
 
 

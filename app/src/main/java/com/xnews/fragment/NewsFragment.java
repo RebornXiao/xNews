@@ -16,6 +16,7 @@ import com.xnews.adapter.NewAdapter;
 import com.xnews.base.BaseFragment;
 import com.xnews.bean.NewModle;
 import com.xnews.callback.NewsDataCallback;
+import com.xnews.config.Tag;
 import com.xnews.config.Url;
 import com.xnews.http.HttpRequest;
 import com.xnews.http.json.NewListJson;
@@ -24,6 +25,7 @@ import com.xnews.utils.NetWorkHelper;
 import com.xnews.utils.SharedPreferencesUtils;
 import com.xnews.utils.ToastUtils;
 import com.xnews.view.swiptlistview.SwipeListView;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +34,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 import okhttp3.Request;
 
 /**
@@ -136,7 +139,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 }
 
                 @Override
-                public void onError(Request request, Exception e) {
+                public void onError(Call call, Exception e) {
                     if (progressBar != null) {
                         progressBar.setVisibility(View.GONE);
                     }
@@ -153,7 +156,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     }
                     listsModles.addAll(response);
                 }
-            }, index);
+            }, index, Tag.NEWSFRAGMENT);
         } else {
             String str = SharedPreferencesUtils.getString(mContext, "NewsFragment");
             List<NewModle> list = NewListJson.instance(mContext).readJsonNewModles(str,
@@ -215,6 +218,11 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         });
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        OkHttpUtils.getInstance().cancelTag(Tag.NEWSFRAGMENT);
+    }
 
     @Override
     public void onDestroyView() {
