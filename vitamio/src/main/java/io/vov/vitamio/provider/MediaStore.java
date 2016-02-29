@@ -28,10 +28,10 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.BaseColumns;
 
-import io.vov.vitamio.utils.Log;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import io.vov.vitamio.utils.Log;
 
 public final class MediaStore {
   public static final String AUTHORITY = "me.abitno.vplayer.mediaprovider";

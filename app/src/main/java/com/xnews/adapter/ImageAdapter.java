@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.xnews.R;
 import com.xnews.view.ProgressButton;
 
@@ -17,6 +17,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+//;
 
 public class ImageAdapter extends BaseAdapter {
     public List<String> lists = new ArrayList<String>();
@@ -66,7 +68,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         holder.currentPage.setText((position + 1) + "/" + lists.size());
-        Picasso.with(context).load(lists.get(position)).into(holder.currentImage);
+        Glide.with(context).load(lists.get(position)).into(holder.currentImage);
 
         return convertView;
     }

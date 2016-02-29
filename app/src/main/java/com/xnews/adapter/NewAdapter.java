@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.xnews.R;
 import com.xnews.bean.NewModle;
 import com.xnews.utils.MLog;
@@ -92,7 +92,7 @@ public class NewAdapter extends BaseAdapter {
             }
             if (!"".equals(newModle.getImgsrc())) {
                 holder.leftImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(newModle.getImgsrc()).into(holder.leftImage);
+                Glide.with(context).load(newModle.getImgsrc()).into(holder.leftImage);
             } else {
                 holder.leftImage.setVisibility(View.GONE);
             }
@@ -104,9 +104,9 @@ public class NewAdapter extends BaseAdapter {
             holder.itemImageLayout.setVisibility(View.VISIBLE);
             holder.itemAbstract.setText(newModle.getTitle());
             List<String> imageModle = newModle.getImagesModle().getImgList();
-            Picasso.with(context).load(imageModle.get(0)).into(holder.itemImage0);
-            Picasso.with(context).load(imageModle.get(1)).into(holder.itemImage1);
-            Picasso.with(context).load(imageModle.get(2)).into(holder.itemImage2);
+            Glide.with(context).load(imageModle.get(0)).into(holder.itemImage0);
+            Glide.with(context).load(imageModle.get(1)).into(holder.itemImage1);
+            Glide.with(context).load(imageModle.get(2)).into(holder.itemImage2);
 
 //            newItemView.setImages(newModle);
         }

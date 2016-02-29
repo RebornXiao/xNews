@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.xnews.R;
 import com.xnews.bean.VideoModle;
 
@@ -18,6 +18,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+;
 
 public class VideoAdapter extends BaseAdapter {
     private Context context;
@@ -71,7 +73,7 @@ public class VideoAdapter extends BaseAdapter {
         holder.videoTime.setText(videoModle.getLength());
         holder.videoTitle.setText(videoModle.getTitle());
         holder.videoTimeStart.setText(videoModle.getPtime());
-        Picasso.with(context).load(videoModle.getCover()).into(holder.videoImg);
+        Glide.with(context).load(videoModle.getCover()).into(holder.videoImg);
 
         return convertView;
     }

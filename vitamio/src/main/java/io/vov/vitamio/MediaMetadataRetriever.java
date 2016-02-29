@@ -24,10 +24,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
-import io.vov.vitamio.utils.FileUtils;
-
 import java.io.FileDescriptor;
 import java.io.IOException;
+
+import io.vov.vitamio.utils.FileUtils;
 
 /**
  * MediaMetadataRetriever is used to get meta data from any media file

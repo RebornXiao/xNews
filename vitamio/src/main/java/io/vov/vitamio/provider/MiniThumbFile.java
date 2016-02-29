@@ -20,9 +20,6 @@ package io.vov.vitamio.provider;
 import android.net.Uri;
 import android.os.Environment;
 
-import io.vov.vitamio.provider.MediaStore.Video;
-import io.vov.vitamio.utils.Log;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -30,6 +27,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.Hashtable;
+
+import io.vov.vitamio.provider.MediaStore.Video;
+import io.vov.vitamio.utils.Log;
 
 public class MiniThumbFile {
   protected static final int BYTES_PER_MINTHUMB = 10000;

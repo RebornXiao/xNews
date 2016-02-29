@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.xnews.R;
 import com.xnews.base.BaseActivity;
 import com.xnews.bean.NewDetailModle;
@@ -151,12 +151,12 @@ public class DetailsActivity extends BaseActivity
 
     private void setData(NewDetailModle newDetailModle) {
         if (!"".equals(newDetailModle.getUrl_mp4())) {
-            Picasso.with(mContext).load(newDetailModle.getCover()).into(newImg);
+            Glide.with(mContext).load(newDetailModle.getCover()).into(newImg);
             newImg.setVisibility(View.VISIBLE);
         } else {
             if (newDetailModle.getImgList().size() > 0) {
                 imgCountString = "共" + newDetailModle.getImgList().size() + "张";
-                Picasso.with(mContext).load(newDetailModle.getImgList().get(0)).into(newImg);
+                Glide.with(mContext).load(newDetailModle.getImgList().get(0)).into(newImg);
                 newImg.setVisibility(View.VISIBLE);
             }
         }

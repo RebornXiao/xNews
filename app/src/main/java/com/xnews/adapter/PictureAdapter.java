@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.xnews.R;
 import com.xnews.bean.PicuterModle;
 
@@ -17,6 +17,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+;
 
 public class PictureAdapter extends BaseAdapter {
     public List<PicuterModle> lists = new ArrayList<PicuterModle>();
@@ -73,7 +75,7 @@ public class PictureAdapter extends BaseAdapter {
         picUrl = picUrl.replace("auto", "854x480x75x0x0x3");
 
         holder.photoTitle.setText(picuterModle.getTitle());
-        Picasso.with(context).load(picUrl).into(holder.photoImg);
+        Glide.with(context).load(picUrl).into(holder.photoImg);
 
         return convertView;
     }

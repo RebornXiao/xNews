@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.xnews.R;
 import com.xnews.bean.PicuterDetailModle;
 import com.xnews.view.ProgressButton;
@@ -18,6 +18,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+;
 
 public class PicuterDetailAdapter extends BaseAdapter {
     public List<PicuterDetailModle> lists = new ArrayList<PicuterDetailModle>();
@@ -72,7 +74,7 @@ public class PicuterDetailAdapter extends BaseAdapter {
         holder.photoContent.setText(picuterDetailModle.getAlt());
         holder.photoTitle.setText(picuterDetailModle.getTitle());
         String imgurl = picuterDetailModle.getPic().replace("auto", "854x480x75x0x0x3");
-        Picasso.with(context).load(imgurl).into(holder.currentImage);
+        Glide.with(context).load(imgurl).into(holder.currentImage);
         return convertView;
     }
 

@@ -240,7 +240,6 @@ public class SwipeListView extends ListView implements OnScrollListener {
      * @param attrs AttributeSet
      */
     private void init(AttributeSet attrs) {
-
         int swipeMode = SWIPE_MODE_BOTH;
         boolean swipeOpenOnLongPress = true;
         boolean swipeCloseAllItemsWhenMoveList = true;

@@ -40,7 +40,7 @@
                 <TextView
                     android:id="@+id/login_name"
                     style="@style/personinfo_list2"
-                    android:text="袁微微" />
+                    android:text="" />
 
             </RelativeLayout>
 
@@ -81,7 +81,7 @@
                 <TextView
                     android:id="@+id/login_phone"
                     style="@style/personinfo_list2"
-                    android:text="15926060207" />
+                    android:text="" />
 
             </RelativeLayout>
 
@@ -144,7 +144,7 @@
                 <TextView
                     android:id="@+id/login_dld"
                     style="@style/personinfo_list2"
-                    android:text="42282019882521522" />
+                    android:text="" />
             </RelativeLayout>
 
 

@@ -27,15 +27,15 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import io.vov.vitamio.provider.MediaStore;
 import io.vov.vitamio.provider.MediaStore.Video;
 import io.vov.vitamio.utils.ContextUtils;
 import io.vov.vitamio.utils.FileUtils;
 import io.vov.vitamio.utils.Log;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
 
 public class MediaScanner {
   private static final String[] VIDEO_PROJECTION = new String[]{Video.Media._ID, Video.Media.DATA, Video.Media.DATE_MODIFIED,};

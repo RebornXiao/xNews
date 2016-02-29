@@ -15,9 +15,9 @@
  */
 package io.vov.vitamio.utils;
 
-import io.vov.vitamio.BuildConfig;
-
 import java.util.MissingFormatArgumentException;
+
+import io.vov.vitamio.BuildConfig;
 
 public class Log {
 	public static final String TAG = "Vitamio[Player]";

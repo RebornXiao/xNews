@@ -38,9 +38,6 @@ import android.util.SparseArray;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
-import io.vov.vitamio.utils.FileUtils;
-import io.vov.vitamio.utils.Log;
-
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -51,6 +48,9 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import io.vov.vitamio.utils.FileUtils;
+import io.vov.vitamio.utils.Log;
 
 /**
  * MediaPlayer class can be used to control playback of audio/video files and

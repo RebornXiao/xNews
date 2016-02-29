@@ -18,11 +18,6 @@ package io.vov.vitamio;
 
 import android.content.Context;
 
-import io.vov.vitamio.utils.CPU;
-import io.vov.vitamio.utils.ContextUtils;
-import io.vov.vitamio.utils.IOUtils;
-import io.vov.vitamio.utils.Log;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,6 +29,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.vov.vitamio.utils.CPU;
+import io.vov.vitamio.utils.ContextUtils;
+import io.vov.vitamio.utils.IOUtils;
+import io.vov.vitamio.utils.Log;
 
 /**
  * Inspect this class before using any other Vitamio classes.
